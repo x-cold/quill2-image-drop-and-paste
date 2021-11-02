@@ -1,0 +1,69 @@
+{
+  "name": "mylib",
+  "version": "0.0.0",
+  "description": "A library for normalizing data",
+  "main": "dist/mylib.umd.js",
+  "module": "dist/mylib.es5.js",
+  "typings": "dist/types/mylib.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:x-cold/rollup-ts-library-boilerplate.git"
+  },
+  "scripts": {
+    "postinstall": "husky install",
+    "lint": "eslint --ext .js,.ts src/",
+    "lint:fix": "eslint --ext .js,.ts --fix src/",
+    "start": "rollup -c rollup.config.ts -w",
+    "docs": "typedoc --out docs --theme minimal src",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.js",
+    "postbuild": "npm run docs",
+    "release": "npm run release:patch",
+    "release:patch": "npm run build && standard-version",
+    "release:minor": "npm run build && standard-version --release-as minor",
+    "release:major": "npm run build && standard-version --release-as major",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "normalize"
+  ],
+  "author": "x-cold <lxstart@outlook.com>",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@types/jest": "^27.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "eslint": "^7.32.0",
+    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "husky": "^7.0.2",
+    "jest": "^27.1.0",
+    "lint-staged": "^11.1.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.56.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "standard-version": "^9.3.1",
+    "ts-jest": "^27.0.5",
+    "typedoc": "^0.21.9",
+    "typescript": "^4.4.2"
+  }
+}
