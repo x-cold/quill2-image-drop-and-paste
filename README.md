@@ -5,6 +5,8 @@ A starter project that makes creating a TypeScript library extremely easy.
 
 ### Usage
 
+> The version of your node.js should be greater than v12
+
 ```bash
 git clone git@github.com:x-cold/rollup-ts-library-boilerplate.git YOURFOLDERNAME
 cd YOURFOLDERNAME

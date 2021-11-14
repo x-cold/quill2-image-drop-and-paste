@@ -1,10 +1,10 @@
 {
-  "name": "mylib",
-  "version": "0.0.0",
+  "name": "quill2-image-drop-and-paste",
+  "version": "0.0.1",
   "description": "A library for normalizing data",
-  "main": "dist/mylib.umd.js",
-  "module": "dist/mylib.es5.js",
-  "typings": "dist/types/mylib.d.ts",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es5.js",
+  "typings": "dist/types/index.d.ts",
   "directories": {
     "test": "test"
   },
@@ -13,7 +13,7 @@
     "url": "git@github.com:x-cold/rollup-ts-library-boilerplate.git"
   },
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "rm -rf .husky/_ && husky install",
     "lint": "eslint --ext .js,.ts src/",
     "lint:fix": "eslint --ext .js,.ts --fix src/",
     "start": "rollup -c rollup.config.ts -w",
@@ -40,17 +40,25 @@
   ],
   "author": "x-cold <lxstart@outlook.com>",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "quill": "^2.0.0-dev.4"
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@rollup/plugin-babel": "^5.3.0",
     "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
     "eslint": "^7.32.0",
-    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-airbnb-typescript": "^15.0.0",
     "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.27.0",
     "husky": "^7.0.2",
     "jest": "^27.1.0",
     "lint-staged": "^11.1.2",

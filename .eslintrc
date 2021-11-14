@@ -1,5 +1,6 @@
 {
-  "extends": "standard-with-typescript",
+  "extends": ["airbnb", "airbnb-typescript"],
+  "plugins": ["react"],
   "parserOptions": {
     "project": "./tsconfig.json"
   }
