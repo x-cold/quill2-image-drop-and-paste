@@ -8,7 +8,7 @@ import { babel } from '@rollup/plugin-babel';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('./package.json');
 
-const libraryName = 'mylib';
+const libraryName = 'index';
 
 export default {
   input: `src/${libraryName}.ts`,
