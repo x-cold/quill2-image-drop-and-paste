@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "PUBLIC_URL=. react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
