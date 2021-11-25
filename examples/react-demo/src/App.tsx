@@ -1,16 +1,18 @@
 import React, { useRef, useEffect } from 'react';
-import Quill from 'quill';
 // @ts-ignore
-import Quill2ImageDropAndPaste from 'quill2-image-drop-and-paste';
+import Quill2ImageDropAndPaste, { LoadingImage } from 'quill2-image-drop-and-paste';
+import Quill from 'quill';
 
 import 'quill/dist/quill.snow.css';
+import './index.css';
 
+Quill.register({ 'formats/loadingIamge': LoadingImage });
 Quill.register('modules/imageDropAndPaste', Quill2ImageDropAndPaste);
 
 const mockUpload = (file: Blob) => new Promise(resolve => {
   // TODO: uploader
   const url = 'https://cdn.nlark.com/yuque/0/2021/jpeg/103147/1637414393290-33a1c232-f002-44ab-b52b-c2f61d193965.jpeg?x-oss-process=image%2Fresize%2Cw_750%2Climit_0';
-  setTimeout(() => resolve(url), 300);
+  setTimeout(() => resolve(url), 5000);
 });
 
 const App: React.FC<{}> = (props) => {
@@ -38,9 +40,9 @@ const App: React.FC<{}> = (props) => {
   }, []);
 
   return  (
-    <div className="App">
+    <div className="App" style={{ width: 960, margin: 'auto' }}>
       <h1>React Example</h1>
-      <div id="editor-container" style={{ height: '320px' }}></div>
+      <div id="editor-container" style={{ height: '640px' }}></div>
     </div>
   );
 }
