@@ -2,6 +2,7 @@ import Quill from 'quill';
 
 export interface Options {
   upload(file: Blob): Promise<string>;
+  imageDomainAllowList?: string[];
 }
 
 export abstract class QuillImageDropAndPaste {
@@ -29,4 +30,10 @@ export interface Op {
 
 export interface AttributeMap {
   [key: string]: any;
+}
+
+export enum ImageStatus {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
 }

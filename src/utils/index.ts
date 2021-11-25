@@ -66,3 +66,5 @@ export const getOpImage = (op: Op): string => {
   const { image = '' } = op.insert as { image: string };
   return image;
 };
+
+export const isDataURL = (s: string): boolean => s.trim().startsWith('data:');

@@ -1,10 +1,15 @@
 import Quill, { RangeStatic } from 'quill';
+import LoadingImage from './blots/image';
 import {
-  img2Blob, isImageOp, getOpImage,
+  img2Blob, isImageOp, getOpImage, isDataURL, url2Img,
 } from './utils';
-import { QuillImageDropAndPaste, Options, Op } from './interfaces';
+import {
+  QuillImageDropAndPaste, Options, Op, ImageStatus,
+} from './interfaces';
 
 const Delta = Quill.import('delta');
+
+Quill.register({ 'formats/loadingIamge': LoadingImage });
 
 class ImageDropAndPaste extends QuillImageDropAndPaste {
   quill: Quill;
@@ -62,37 +67,74 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
       return;
     }
     if (e.clipboardData.types.includes('text/html') && !e.clipboardData.types.includes('Files')) {
-      this.uploadAndReplaceImgs();
+      this.restoreImages();
     }
   }
 
-  uploadAndReplaceImgs() {
+  shouldImageRestore(url: string) {
+    const allowList = this.options.imageDomainAllowList || [window.location.hostname];
+    if (isDataURL(url)) {
+      return true;
+    }
+    const { hostname } = new URL(url);
+    return !allowList.includes(hostname);
+  }
+
+  async restoreImage(op: Op): Promise<void> {
+    const originalUrl = getOpImage(op);
+    if (!this.shouldImageRestore(originalUrl)) {
+      return;
+    }
+    try {
+      const imageElement = !isDataURL(originalUrl)
+        ? this.quill.root.querySelector(`img[src="${originalUrl}"]`)
+        : url2Img(originalUrl);
+      if (!imageElement) {
+        console.warn('Can not read img element of url: %s', originalUrl);
+        return;
+      }
+      this.modifyImageDelta(originalUrl, '', ImageStatus.LOADING);
+      const file = await img2Blob(imageElement as HTMLImageElement, {});
+      const targetUrl = await this.options.upload(file);
+      this.modifyImageDelta(originalUrl, targetUrl, ImageStatus.SUCCESS);
+    } catch (error) {
+      console.warn(error);
+      this.modifyImageDelta(originalUrl, '', ImageStatus.ERROR);
+    }
+  }
+
+  restoreImages() {
     const delta = this.quill.getContents();
     for (let i = 0; i < delta.ops.length; i += 1) {
       const op = delta.ops[i];
       // Replace original url to target url
       if (isImageOp(op)) {
-        this.handleImg(op);
+        this.restoreImage(op);
       }
     }
   }
 
-  async handleImg(op: Op): Promise<void> {
-    const image = getOpImage(op);
-    const imageElement = document.querySelector(`img[src="${image}"]`);
-    if (!imageElement) {
-      console.warn('Can not read img element of url: %s', image);
-      return;
-    }
-    const file = await img2Blob(imageElement as HTMLImageElement, {});
-    const url = await this.options.upload(file);
+  async modifyImageDelta(originalUrl: string, targetUrl: string, status: ImageStatus) {
     const delta = this.quill.getContents();
-    const index = delta.ops.findIndex((_op: Op) => isImageOp(_op) && getOpImage(_op) === image);
+    const index = delta.ops.findIndex(
+      (_op: Op) => isImageOp(_op) && getOpImage(_op) === originalUrl,
+    );
+    const { attributes } = delta.ops[index];
     const newOp: Op = {
-      attributes: op.attributes,
-      insert: {
-        image: url,
+      attributes: {
+        ...attributes,
+        alt: status,
       },
+      insert: {
+        image: targetUrl || originalUrl,
+      },
+      // insert: status !== ImageStatus.LOADING
+      //   ? {
+      //     image: targetUrl || originalUrl,
+      //   }
+      //   : {
+      //     [LoadingImage.blotName]: originalUrl,
+      //   },
     };
     // const previousDelta = new Delta(delta.ops.slice(0, index));
     // const previousLength = previousDelta.length();
@@ -107,3 +149,7 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
 }
 
 export default ImageDropAndPaste;
+
+export {
+  LoadingImage,
+};
