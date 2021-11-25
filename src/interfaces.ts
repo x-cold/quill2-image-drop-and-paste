@@ -1,7 +1,7 @@
 import Quill from 'quill';
 
 export interface Options {
-  upload(file: File | Blob): Promise<string>;
+  upload(file: Blob): Promise<string>;
 }
 
 export abstract class QuillImageDropAndPaste {
