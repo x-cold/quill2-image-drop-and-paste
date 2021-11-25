@@ -20,7 +20,6 @@
     "docs": "typedoc --out docs --theme minimal src",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.js",
-    "postbuild": "npm run docs",
     "release": "npm run release:patch",
     "release:patch": "npm run build && standard-version",
     "release:minor": "npm run build && standard-version --release-as minor",
