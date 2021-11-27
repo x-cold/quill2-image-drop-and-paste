@@ -60,11 +60,21 @@ export const img2Blob = (img: HTMLImageElement, {
   },
 );
 
-export const isImageOp = (op: Op) => op.insert !== 'undefined' && typeof op.insert !== 'string' && (op.insert as { image: string }).image;
+export const isImageOp = (op: Op): boolean => {
+  if (op.insert === 'undefined' || typeof op.insert === 'string') {
+    return false;
+  }
 
-export const getOpImage = (op: Op): string => {
-  const { image = '' } = op.insert as { image: string };
-  return image;
+  const insert = op.insert as { image?: string, ['loading-iamge']?: string };
+  return typeof (insert.image || insert['loading-iamge']) === 'string';
 };
 
-export const isDataURL = (s: string): boolean => s.trim().startsWith('data:');
+export const getImageUrlOfOp = (op: Op): string => {
+  if (typeof op.insert === 'object') {
+    const insert = op.insert as { image?: string, ['loading-iamge']?: string };
+    return insert.image || insert['loading-iamge'] || '';
+  }
+  return '';
+};
+
+export const isDataURL = (s: string): boolean => /^data:image\/.+;base64/.test(s);

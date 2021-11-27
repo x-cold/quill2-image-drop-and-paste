@@ -1,7 +1,7 @@
 import Quill, { RangeStatic } from 'quill';
 import LoadingImage from './blots/image';
 import {
-  img2Blob, isImageOp, getOpImage, isDataURL, url2Img,
+  img2Blob, isImageOp, getImageUrlOfOp, isDataURL, url2Img,
 } from './utils';
 import {
   QuillImageDropAndPaste, Options, Op, ImageStatus,
@@ -9,12 +9,17 @@ import {
 
 const Delta = Quill.import('delta');
 
-Quill.register({ 'formats/loadingIamge': LoadingImage });
+// TODO: this is an invalid usage
+Quill.register({ 'formats/loading-image': LoadingImage }, true);
 
 class ImageDropAndPaste extends QuillImageDropAndPaste {
   quill: Quill;
 
   options: Options;
+
+  private altMap = new Map<string, string>();
+
+  private urlMap = new Map<string, string>();
 
   constructor(quill: Quill, options: Options) {
     super(quill, options);
@@ -81,7 +86,7 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
   }
 
   async restoreImage(op: Op): Promise<void> {
-    const originalUrl = getOpImage(op);
+    const originalUrl = getImageUrlOfOp(op);
     if (!this.shouldImageRestore(originalUrl)) {
       return;
     }
@@ -93,9 +98,18 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
         console.warn('Can not read img element of url: %s', originalUrl);
         return;
       }
+      const { attributes } = op;
+      // TODO: base64 encode image has a too large string length
+      this.altMap.set(originalUrl, attributes?.alt || '');
+      const cachedUrl = this.urlMap.get(originalUrl);
+      if (typeof cachedUrl === 'string') {
+        this.modifyImageDelta(originalUrl, cachedUrl, ImageStatus.SUCCESS);
+        return;
+      }
       this.modifyImageDelta(originalUrl, '', ImageStatus.LOADING);
       const file = await img2Blob(imageElement as HTMLImageElement, {});
       const targetUrl = await this.options.upload(file);
+      this.urlMap.set(originalUrl, targetUrl);
       this.modifyImageDelta(originalUrl, targetUrl, ImageStatus.SUCCESS);
     } catch (error) {
       console.warn(error);
@@ -117,13 +131,16 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
   async modifyImageDelta(originalUrl: string, targetUrl: string, status: ImageStatus) {
     const delta = this.quill.getContents();
     const index = delta.ops.findIndex(
-      (_op: Op) => isImageOp(_op) && getOpImage(_op) === originalUrl,
+      (_op: Op) => isImageOp(_op) && getImageUrlOfOp(_op) === originalUrl,
     );
-    const { attributes } = delta.ops[index];
+    const { attributes } = delta.ops[index] || {};
+    const alt = status === ImageStatus.SUCCESS
+      ? this.altMap.get(originalUrl)
+      : status;
     const newOp: Op = {
       attributes: {
-        ...attributes,
-        alt: status,
+        ...(attributes || {}),
+        alt,
       },
       insert: {
         image: targetUrl || originalUrl,

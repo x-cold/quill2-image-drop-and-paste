@@ -1,33 +1,29 @@
-import Quill from 'quill';
+import parchment from 'parchment';
 
-// Reference: https://github.com/NoelOConnell/quill-image-uploader/blob/98907e3af69730c2bc5a9d1d9da59c4ac5f486a0/src/blots/image.js
+// import Quill from 'quill';
 
-const Block = Quill.import('blots/block');
+// const { InlineBlot } = Quill.import('parchment');
+// const Embed = Quill.import('blots/embed');
+// const InlineBlot = Quill.import('blots/inline');
 
-class LoadingImage extends Block {
-  static create(src: string | true) {
+class LoadingImage extends parchment.EmbedBlot {
+  static create(src: string) {
     const node = super.create(src);
-    if (src === true) return node;
 
     const image = document.createElement('img');
     image.setAttribute('src', src);
     node.appendChild(image);
+    node.setAttribute('data-src', src);
     return node;
   }
 
-  deleteAt(index: number, length: number) {
-    super.deleteAt(index, length);
-    this.cache = {};
-  }
-
-  static value(domNode: HTMLSpanElement) {
-    const { src, custom } = domNode.dataset;
-    return { src, custom };
+  static value(domNode: HTMLParagraphElement) {
+    return domNode.getAttribute('data-src') || '';
   }
 }
 
-LoadingImage.blotName = 'loadingIamge';
-LoadingImage.className = 'image-uploading';
-LoadingImage.tagName = 'span';
+LoadingImage.blotName = 'loading-iamge';
+LoadingImage.className = 'ql-image-uploading';
+LoadingImage.tagName = 'SECTION';
 
 export default LoadingImage;
