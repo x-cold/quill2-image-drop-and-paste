@@ -1,6 +1,6 @@
 {
   "name": "quill2-image-drop-and-paste",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A quill plugin to deal with pasting and droping images and html including images",
   "main": "dist/index.umd.js",
   "module": "dist/index.es5.js",

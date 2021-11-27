@@ -5,7 +5,6 @@ quill2-image-drop-and-paste
 [![NPM version][npm-image]][npm-url]
 [![build status][gitflow-image]][gitflow-url]
 [![Test coverage][codecov-image]][codecov-url]
-[![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/quill2-image-drop-and-paste.svg?style=flat-square
@@ -14,12 +13,12 @@ quill2-image-drop-and-paste
 [gitflow-url]: https://github.com/x-cold/quill2-image-drop-and-paste/actions/workflows/nodejs.yml
 [codecov-image]: https://codecov.io/gh/x-cold/quill2-image-drop-and-paste/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/x-cold/quill2-image-drop-and-paste
-[david-image]: https://img.shields.io/david/x-cold/quill2-image-drop-and-paste.svg?style=flat-square
-[david-url]: https://david-dm.org/x-cold/quill2-image-drop-and-paste
 [download-image]: https://badgen.net/npm/dt/quill2-image-drop-and-paste
 [download-url]: https://npmjs.org/package/quill2-image-drop-and-paste
 
 A quill plugin to deal with pasting and droping images and html including images.
+
+![Paste html](./screenshots/paste-html.gif)
 
 ## Usage
 
