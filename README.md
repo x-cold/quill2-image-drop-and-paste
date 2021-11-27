@@ -62,7 +62,9 @@ function uploadImage(file: Blob): string {
 
 ## Examples
 
-- [React Demo](https://github.com/x-cold/quill2-image-drop-and-paste/tree/master/example/react-demo)
+- React Demo
+  - [Online showcase](https://x-cold.github.io/quill2-image-drop-and-paste/react-demo/)
+  - [Source code](https://github.com/x-cold/quill2-image-drop-and-paste/tree/master/examples/react-demo)
 
 ## Development
 
