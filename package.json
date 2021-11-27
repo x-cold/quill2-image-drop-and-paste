@@ -1,7 +1,7 @@
 {
   "name": "quill2-image-drop-and-paste",
   "version": "0.0.1",
-  "description": "A library for normalizing data",
+  "description": "A quill plugin to deal with pasting and droping images and html including images",
   "main": "dist/index.umd.js",
   "module": "dist/index.es5.js",
   "typings": "dist/types/index.d.ts",
@@ -26,7 +26,8 @@
     "release:major": "npm run build && standard-version --release-as major",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
-    "test:prod": "npm run lint && npm run test -- --no-cache"
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "deploy": "rm -rf docs/ && npm run docs && cd examples/react-demo && npm run deploy"
   },
   "lint-staged": {
     "src/**/*.ts": [

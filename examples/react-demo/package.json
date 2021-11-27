@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "PUBLIC_URL=. react-scripts build"
+    "build": "PUBLIC_URL=. SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "move": "mkdir -p ../../docs/ && mv build ../../docs/react-demo",
+    "deploy": "npm run build && npm run move"
   },
   "eslintConfig": {
     "extends": "react-app"
