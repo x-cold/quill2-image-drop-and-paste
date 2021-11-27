@@ -88,7 +88,16 @@ function uploadImage(file: Blob): string {
 
 ```bash
 npm install
-npm run dev
+npm start
+```
+
+- Local demo
+
+```
+cd exmaples/react-demo
+npm install
+npm link ../../
+npm start
 ```
 
 - Build
@@ -100,5 +109,5 @@ npm run build
 - Publish the package following [semantic version](https://semver.org/)
 
 ```
-npm run publish
+npm publish
 ```
