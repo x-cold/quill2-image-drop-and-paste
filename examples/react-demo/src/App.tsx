@@ -1,12 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 // @ts-ignore
-import Quill2ImageDropAndPaste, { LoadingImage } from 'quill2-image-drop-and-paste';
+import Quill2ImageDropAndPaste from 'quill2-image-drop-and-paste';
 import Quill from 'quill';
 
 import 'quill/dist/quill.snow.css';
 import './index.css';
 
-Quill.register({ 'formats/loadingIamge': LoadingImage });
 Quill.register('modules/imageDropAndPaste', Quill2ImageDropAndPaste);
 
 const mockUpload = (file: Blob) => new Promise(resolve => {
@@ -27,6 +26,9 @@ const App: React.FC<{}> = (props) => {
         toolbar: [['bold', 'italic'], ['link', 'image']],
         imageDropAndPaste: {
           upload: mockUpload,
+          imageDomainAllowList: [
+            'cdn.nlark.com'
+          ]
         },
         history: {
           userOnly: true,
