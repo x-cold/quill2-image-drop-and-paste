@@ -5,7 +5,8 @@
   "dependencies": {
     "quill": "^2.0.0-dev.4",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "quill2-image-drop-and-paste": "^0.0.3"
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
