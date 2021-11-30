@@ -2705,7 +2705,13 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-function tsd-parent-kind-module">
+			<a href="utils.html#convertURLtoFile" class="tsd-kind-icon">convertURLto<wbr>File</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-module">
 			<a href="utils.html#getImageUrlOfOp" class="tsd-kind-icon">get<wbr>Image<wbr>Url<wbr>OfOp</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-module">
+			<a href="utils.html#getLoadedImage" class="tsd-kind-icon">get<wbr>Loaded<wbr>Image</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-module">
 			<a href="utils.html#img2Blob" class="tsd-kind-icon">img2<wbr>Blob</a>
@@ -2730,7 +2736,9 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils.html#convertURLtoFile" class="tsd-kind-icon">convertURLto<wbr>File</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils.html#getImageUrlOfOp" class="tsd-kind-icon">get<wbr>Image<wbr>Url<wbr>OfOp</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils.html#getLoadedImage" class="tsd-kind-icon">get<wbr>Loaded<wbr>Image</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils.html#img2Blob" class="tsd-kind-icon">img2<wbr>Blob</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils.html#isDataURL" class="tsd-kind-icon">is<wbr>DataURL</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils.html#isImageOp" class="tsd-kind-icon">is<wbr>Image<wbr>Op</a></li>
@@ -2743,6 +2751,29 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+				<a name="convertURLtoFile" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> convertURLto<wbr>File</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+					<li class="tsd-signature tsd-kind-icon">convertURLto<wbr>File<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">File</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L77">utils/index.ts:77</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>url: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">File</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 				<a name="getImageUrlOfOp" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Image<wbr>Url<wbr>OfOp</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -2752,7 +2783,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/c857361/src/utils/index.ts#L72">utils/index.ts:72</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L94">utils/index.ts:94</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2766,6 +2797,29 @@ img {
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+				<a name="getLoadedImage" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Loaded<wbr>Image</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Loaded<wbr>Image<span class="tsd-signature-symbol">(</span>image<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLImageElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L63">utils/index.ts:63</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>image: <span class="tsd-signature-type">HTMLImageElement</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 				<a name="img2Blob" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> img2<wbr>Blob</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -2775,7 +2829,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/c857361/src/utils/index.ts#L28">utils/index.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L28">utils/index.ts:28</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2809,7 +2863,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/c857361/src/utils/index.ts#L80">utils/index.ts:80</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L102">utils/index.ts:102</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2832,7 +2886,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/c857361/src/utils/index.ts#L63">utils/index.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L85">utils/index.ts:85</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2855,7 +2909,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/c857361/src/utils/index.ts#L3">utils/index.ts:3</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/fe7315e/src/utils/index.ts#L3">utils/index.ts:3</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
