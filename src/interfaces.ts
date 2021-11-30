@@ -3,6 +3,7 @@ import Quill from 'quill';
 export interface Options {
   upload(file: Blob): Promise<string>;
   imageDomainAllowList?: string[];
+  imageDomainMatch?: (url: string) => boolean;
 }
 
 export abstract class QuillImageDropAndPaste {

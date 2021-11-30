@@ -78,11 +78,12 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
 
   shouldImageRestore(url: string) {
     const allowList = this.options.imageDomainAllowList || [window.location.hostname];
+    const match = this.options.imageDomainMatch || (() => true);
     if (isDataURL(url)) {
       return true;
     }
     const { hostname } = new URL(url);
-    return !allowList.includes(hostname);
+    return !allowList.includes(hostname) && !match(hostname);
   }
 
   async restoreImage(op: Op): Promise<void> {
@@ -91,9 +92,10 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
       return;
     }
     try {
-      const imageElement = !isDataURL(originalUrl)
-        ? this.quill.root.querySelector(`img[src="${originalUrl}"]`)
-        : url2Img(originalUrl);
+      // const imageElement = !isDataURL(originalUrl)
+      //   ? this.quill.root.querySelector(`img[src="${originalUrl}"]`)
+      //   : url2Img(originalUrl);
+      const imageElement = await url2Img(originalUrl);
       if (!imageElement) {
         console.warn('Can not read img element of url: %s', originalUrl);
         return;
@@ -108,6 +110,8 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
       }
       this.modifyImageDelta(originalUrl, '', ImageStatus.LOADING);
       const file = await img2Blob(imageElement as HTMLImageElement, {});
+      // const file = await getLoadedImage(imageElement as HTMLImageElement);
+      // const file = await convertURLtoFile(originalUrl);
       const targetUrl = await this.options.upload(file);
       this.urlMap.set(originalUrl, targetUrl);
       this.modifyImageDelta(originalUrl, targetUrl, ImageStatus.SUCCESS);
