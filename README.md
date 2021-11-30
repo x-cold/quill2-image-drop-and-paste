@@ -43,7 +43,10 @@ const quill = new Quill('#editor-container', {
       upload: uploadImage,
       imageDomainAllowList: [
         'cdn.nlark.com'
-      ]
+      ],
+      imageDomainMatch() {
+
+      },
     },
     history: {
       userOnly: true, // Recommend to turn on this option
@@ -52,7 +55,7 @@ const quill = new Quill('#editor-container', {
   },
 });
 
-function uploadImage(file: Blob): string {
+function uploadImage(file: Blob, originalUrl: string): string {
 
 }
 ```
