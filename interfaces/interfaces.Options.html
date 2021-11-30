@@ -2723,7 +2723,7 @@ img {
 					<a href="interfaces.Options.html#imageDomainAllowList" class="tsd-kind-icon">image<wbr>Domain<wbr>Allow<wbr>List</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
-					<a href="interfaces.Options.html#imageDomainMatch" class="tsd-kind-icon">image<wbr>Domain<wbr>Match</a>
+					<a href="interfaces.Options.html#imageAllowMatch" class="tsd-kind-icon">image<wbr>Allow<wbr>Match</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="interfaces.Options.html#upload" class="tsd-kind-icon">upload</a>
@@ -2755,7 +2755,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="interfaces.Options.html#imageDomainMatch" class="tsd-kind-icon">image<wbr>Domain<wbr>Match</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="interfaces.Options.html#imageAllowMatch" class="tsd-kind-icon">image<wbr>Allow<wbr>Match</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="interfaces.Options.html#upload" class="tsd-kind-icon">upload</a></li>
 						</ul>
 					</section>
@@ -2770,7 +2770,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">image<wbr>Domain<wbr>Allow<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/9576bf1/src/interfaces.ts#L5">interfaces.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/d83190d/src/interfaces.ts#L5">interfaces.ts:5</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2778,16 +2778,16 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-				<a name="imageDomainMatch" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> image<wbr>Domain<wbr>Match</h3>
+				<a name="imageAllowMatch" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> image<wbr>Allow<wbr>Match</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">image<wbr>Domain<wbr>Match<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					<li class="tsd-signature tsd-kind-icon">image<wbr>Allow<wbr>Match<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/9576bf1/src/interfaces.ts#L6">interfaces.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/d83190d/src/interfaces.ts#L6">interfaces.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2804,19 +2804,22 @@ img {
 				<a name="upload" class="tsd-anchor"></a>
 				<h3>upload</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">upload<span class="tsd-signature-symbol">(</span>file<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">upload<span class="tsd-signature-symbol">(</span>file<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Blob</span>, originalUrl<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/9576bf1/src/interfaces.ts#L4">interfaces.ts:4</a></li>
+								<li>Defined in <a href="https://github.com/x-cold/quill2-image-drop-and-paste/blob/d83190d/src/interfaces.ts#L4">interfaces.ts:4</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>file: <span class="tsd-signature-type">Blob</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> originalUrl: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
