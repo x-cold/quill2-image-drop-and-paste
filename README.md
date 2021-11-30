@@ -44,7 +44,7 @@ const quill = new Quill('#editor-container', {
       imageDomainAllowList: [
         'cdn.nlark.com'
       ],
-      imageDomainMatch() {
+      imageAllowMatch(url: string) {
 
       },
     },
