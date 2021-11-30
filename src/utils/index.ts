@@ -60,6 +60,28 @@ export const img2Blob = (img: HTMLImageElement, {
   },
 );
 
+export const getLoadedImage = (image: HTMLImageElement): Promise<Blob> => new Promise(
+  (resolve, reject) => {
+    const img = image;
+    if (!img.complete) {
+      img.onload = () => {
+        resolve(img2Blob(img, {}));
+      };
+      img.onerror = (err) => reject(err);
+      return;
+    }
+    img2Blob(img, {}).then(resolve, reject);
+  },
+);
+
+export const convertURLtoFile = async (url: string) => {
+  const response = await fetch(url);
+  const data = await response.blob();
+  const filename = url.split('/').pop(); // url 구조에 맞게 수정할 것
+  const metadata = { type: 'image/jpeg' };
+  return new File([data], filename!, metadata);
+};
+
 export const isImageOp = (op: Op): boolean => {
   if (op.insert === 'undefined' || typeof op.insert === 'string') {
     return false;
