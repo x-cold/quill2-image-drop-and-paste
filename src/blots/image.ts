@@ -1,8 +1,8 @@
-import parchment from 'parchment';
+// import parchment from 'parchment';
 
-// import Quill from 'quill';
+import Quill from 'quill';
 
-// const { InlineBlot } = Quill.import('parchment');
+const parchment = Quill.import('parchment');
 // const Embed = Quill.import('blots/embed');
 // const InlineBlot = Quill.import('blots/inline');
 
