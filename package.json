@@ -1,6 +1,6 @@
 {
   "name": "quill2-image-drop-and-paste",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A quill plugin to deal with pasting and droping images and html including images",
   "main": "dist/index.umd.js",
   "module": "dist/index.es5.js",
@@ -41,7 +41,6 @@
   "author": "x-cold <lxstart@outlook.com>",
   "license": "ISC",
   "dependencies": {
-    "parchment": "^2.0.0-dev.2",
     "quill": "^2.0.0-dev.4"
   },
   "devDependencies": {
@@ -76,7 +75,7 @@
     "typedoc": "^0.21.9",
     "typescript": "^4.4.2"
   },
-  "publishConfig":{
+  "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }
 }

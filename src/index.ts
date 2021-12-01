@@ -12,10 +12,18 @@ const Delta = Quill.import('delta');
 // TODO: this is an invalid usage
 Quill.register({ 'formats/loading-image': LoadingImage }, true);
 
+const defaultOptions: Required<Options> = {
+  imageAllowMatch: () => false,
+  imageDomainAllowList: [],
+  async upload(file: Blob, originalUrl: string) {
+    return originalUrl;
+  },
+};
+
 class ImageDropAndPaste extends QuillImageDropAndPaste {
   quill: Quill;
 
-  options: Options;
+  options: Required<Options>;
 
   private altMap = new Map<string, string>();
 
@@ -24,8 +32,17 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
   constructor(quill: Quill, options: Options) {
     super(quill, options);
     this.quill = quill;
-    this.options = options;
 
+    this.options = {
+      ...defaultOptions,
+      ...options,
+    };
+
+    if (!options) {
+      return;
+    }
+
+    this.options.imageDomainAllowList?.push(window.location.hostname);
     this.handleDrop = this.handleDrop.bind(this);
     this.handlePaste = this.handlePaste.bind(this);
     this.quill.root.addEventListener('drop', this.handleDrop, false);
@@ -43,7 +60,7 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
    */
   injectUploaderHandler() {
     const imageHandler = (range: RangeStatic, files: Blob[]) => {
-      const promises = files.map(this.options.upload);
+      const promises = files.map((file: Blob) => this.options.upload(file));
       Promise.all(promises).then((images) => {
         const update = images.reduce(
           (delta, image) => delta.insert({ image }),
@@ -77,13 +94,16 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
   }
 
   shouldImageRestore(url: string) {
-    const allowList = this.options.imageDomainAllowList || [window.location.hostname];
-    const match = this.options.imageDomainMatch || (() => true);
+    const allowList = this.options.imageDomainAllowList;
+    const match = this.options.imageAllowMatch;
     if (isDataURL(url)) {
       return true;
     }
     const { hostname } = new URL(url);
-    return !allowList.includes(hostname) && !match(hostname);
+    if (allowList.includes(hostname)) {
+      return false;
+    }
+    return !match(hostname);
   }
 
   async restoreImage(op: Op): Promise<void> {
@@ -112,7 +132,7 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
       const file = await img2Blob(imageElement as HTMLImageElement, {});
       // const file = await getLoadedImage(imageElement as HTMLImageElement);
       // const file = await convertURLtoFile(originalUrl);
-      const targetUrl = await this.options.upload(file);
+      const targetUrl = await this.options.upload(file, originalUrl);
       this.urlMap.set(originalUrl, targetUrl);
       this.modifyImageDelta(originalUrl, targetUrl, ImageStatus.SUCCESS);
     } catch (error) {
@@ -165,7 +185,7 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
       newOp,
       ...delta.ops.slice(index + 1),
     ]);
-    this.quill.setContents(newDelta, 'api');
+    this.quill.setContents(newDelta, 'silent');
   }
 }
 

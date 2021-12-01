@@ -8,7 +8,7 @@ import './index.css';
 
 Quill.register('modules/imageDropAndPaste', Quill2ImageDropAndPaste);
 
-const mockUpload = (file: Blob) => new Promise(resolve => {
+const mockUpload = (file: Blob, originalUrl?: string) => new Promise(resolve => {
   // TODO: uploader
   const url = 'https://cdn.nlark.com/yuque/0/2021/jpeg/103147/1637414393290-33a1c232-f002-44ab-b52b-c2f61d193965.jpeg?x-oss-process=image%2Fresize%2Cw_750%2Climit_0';
   setTimeout(() => resolve(url), 5000);
@@ -28,7 +28,10 @@ const App: React.FC<{}> = (props) => {
           upload: mockUpload,
           imageDomainAllowList: [
             'cdn.nlark.com'
-          ]
+          ],
+          imageAllowMatch(url: string) {
+
+          }
         },
         history: {
           userOnly: true,
