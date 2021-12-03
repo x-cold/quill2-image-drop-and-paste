@@ -82,8 +82,9 @@ function uploadImage(file: Blob, originalUrl: string): string {
  - `npm run release:minor`: Automatically upgrade minor versioin and update CHANGELOG.md
  - `npm run release:major`: Automatically upgrade major versioin and update CHANGELOG.md
  - `npm run test`: Run test suite via jest with code coverage
-  - `npm run test:watch`: Run test suite in [interactive watch mode](http://facebook.github.io/jest/docs/cli.html#watch)
+ - `npm run test:watch`: Run test suite in [interactive watch mode](http://facebook.github.io/jest/docs/cli.html#watch)
  - `npm run test:prod`: Run linting and generate coverage
+ - `npm run deploy`: Deploy github pages
 
 ### Cookbook
 
