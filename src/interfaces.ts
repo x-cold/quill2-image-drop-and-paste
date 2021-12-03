@@ -34,7 +34,7 @@ export interface AttributeMap {
 }
 
 export enum ImageStatus {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
+  LOADING = 'ql-image-loading',
+  SUCCESS = 'ql-image-success',
+  ERROR = 'ql-image-error',
 }

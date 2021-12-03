@@ -1,19 +1,14 @@
 
-.ql-editor img[alt="loading"] {
+.ql-editor img[alt="ql-image-loading"] {
   position: relative;
   opacity: 0.3;
 }
 
-.ql-editor img[alt="loading"]::after {
-
-  content: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
-}
-
-.ql-editor img[alt="error"] {
+.ql-editor img[alt="ql-image-error"] {
   border: red;
 }
 
-.ql-editor img[alt="success"] {
+.ql-editor img[alt="ql-image-success"] {
   opacity: 1;
 }
 

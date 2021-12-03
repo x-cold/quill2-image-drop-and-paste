@@ -121,20 +121,26 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
         return;
       }
       const { attributes } = op;
-      // TODO: base64 encode image has a too large string length
-      this.altMap.set(originalUrl, attributes?.alt || '');
       const cachedUrl = this.urlMap.get(originalUrl);
       if (typeof cachedUrl === 'string') {
         this.modifyImageDelta(originalUrl, cachedUrl, ImageStatus.SUCCESS);
         return;
       }
+      if (attributes?.alt === ImageStatus.LOADING) {
+        // If the image matches loading status, do nothing to avoid repeated loading.
+        return;
+      }
+      // TODO: base64 encode image has a too large string length
       this.modifyImageDelta(originalUrl, '', ImageStatus.LOADING);
-      const file = await img2Blob(imageElement as HTMLImageElement, {});
-      // const file = await getLoadedImage(imageElement as HTMLImageElement);
-      // const file = await convertURLtoFile(originalUrl);
-      const targetUrl = await this.options.upload(file, originalUrl);
-      this.urlMap.set(originalUrl, targetUrl);
-      this.modifyImageDelta(originalUrl, targetUrl, ImageStatus.SUCCESS);
+      if (!this.altMap.has(originalUrl)) {
+        this.altMap.set(originalUrl, attributes?.alt || '');
+        const file = await img2Blob(imageElement as HTMLImageElement, {});
+        // const file = await getLoadedImage(imageElement as HTMLImageElement);
+        // const file = await convertURLtoFile(originalUrl);
+        const targetUrl = await this.options.upload(file, originalUrl);
+        this.urlMap.set(originalUrl, targetUrl);
+        this.modifyImageDelta(originalUrl, targetUrl, ImageStatus.SUCCESS);
+      }
     } catch (error) {
       console.warn(error);
       this.modifyImageDelta(originalUrl, '', ImageStatus.ERROR);
@@ -154,37 +160,38 @@ class ImageDropAndPaste extends QuillImageDropAndPaste {
 
   async modifyImageDelta(originalUrl: string, targetUrl: string, status: ImageStatus) {
     const delta = this.quill.getContents();
-    const index = delta.ops.findIndex(
-      (_op: Op) => isImageOp(_op) && getImageUrlOfOp(_op) === originalUrl,
-    );
-    const { attributes } = delta.ops[index] || {};
-    const alt = status === ImageStatus.SUCCESS
-      ? this.altMap.get(originalUrl)
-      : status;
-    const newOp: Op = {
-      attributes: {
-        ...(attributes || {}),
-        alt,
-      },
-      insert: {
-        image: targetUrl || originalUrl,
-      },
-      // insert: status !== ImageStatus.LOADING
-      //   ? {
-      //     image: targetUrl || originalUrl,
-      //   }
-      //   : {
-      //     [LoadingImage.blotName]: originalUrl,
-      //   },
-    };
-    // const previousDelta = new Delta(delta.ops.slice(0, index));
-    // const previousLength = previousDelta.length();
-    // const newDelta = new Delta().retain(previousLength + 1).delete(1).insert(newOp);
-    const newDelta = new Delta([
-      ...delta.ops.slice(0, index),
-      newOp,
-      ...delta.ops.slice(index + 1),
-    ]);
+    const newOps = delta.ops.map((op) => {
+      const matchedImage = isImageOp(op) && getImageUrlOfOp(op) === originalUrl;
+      if (!matchedImage) {
+        return op;
+      }
+      const { attributes } = op;
+      const finalStatus = targetUrl
+        ? ImageStatus.SUCCESS
+        : status;
+      const alt = finalStatus === ImageStatus.SUCCESS
+        ? this.altMap.get(originalUrl)
+        : status;
+      const finalUrl = targetUrl || originalUrl;
+      const newOp: Op = {
+        attributes: {
+          ...(attributes || {}),
+          alt,
+        },
+        insert: {
+          image: finalUrl,
+        },
+        // insert: status !== ImageStatus.LOADING
+        //   ? {
+        //     image: targetUrl || originalUrl,
+        //   }
+        //   : {
+        //     [LoadingImage.blotName]: originalUrl,
+        //   },
+      };
+      return newOp;
+    });
+    const newDelta = new Delta(newOps);
     this.quill.setContents(newDelta, 'silent');
   }
 }
