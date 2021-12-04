@@ -24,7 +24,7 @@
     "release:patch": "npm run build && standard-version",
     "release:minor": "npm run build && standard-version --release-as minor",
     "release:major": "npm run build && standard-version --release-as major",
-    "test": "echo skip",
+    "test": "echo 'skip unit tests'",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "deploy": "rm -rf docs/ && npm run docs && cd examples/react-demo && npm run deploy"
