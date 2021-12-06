@@ -17,6 +17,7 @@
     "lint": "eslint --ext .js,.ts src/",
     "lint:fix": "eslint --ext .js,.ts --fix src/",
     "start": "rollup -c rollup.config.js -w",
+    "start:demo": "cd ./examples/react-demo && npm link ../../ && npm start",
     "docs": "typedoc --out docs --theme minimal src",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.js",

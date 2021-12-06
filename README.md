@@ -98,7 +98,7 @@ npm start
 - Local demo
 
 ```
-cd exmaples/react-demo
+cd examples/react-demo
 npm install
 npm link ../../
 npm start
