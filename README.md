@@ -16,7 +16,7 @@ quill2-image-drop-and-paste
 [download-image]: https://badgen.net/npm/dt/quill2-image-drop-and-paste
 [download-url]: https://npmjs.org/package/quill2-image-drop-and-paste
 
-A quill plugin to deal with pasting and droping images and html including images. [[Example]((https://x-cold.github.io/quill2-image-drop-and-paste/react-demo/))].
+A quill plugin to deal with pasting and droping images and html including images. [Example](https://x-cold.github.io/quill2-image-drop-and-paste/react-demo/).
 
 ![Paste html](https://github.com/x-cold/quill2-image-drop-and-paste/blob/master/screenshots/paste-html.gif)
 
