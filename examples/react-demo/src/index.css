@@ -1,4 +1,6 @@
-
+.ql-editor img {
+  transition: opacity 0.6s;
+}
 .ql-editor img[alt="ql-image-loading"] {
   position: relative;
   opacity: 0.3;
