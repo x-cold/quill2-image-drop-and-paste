@@ -22,7 +22,7 @@
     "prebuild": "rimraf dist",
     "build": "rollup -c rollup.config.js",
     "release": "npm run release:patch",
-    "release:patch": "npm run build && standard-version",
+    "release:patch": "npm run build && standard-version --release-as patch",
     "release:minor": "npm run build && standard-version --release-as minor",
     "release:major": "npm run build && standard-version --release-as major",
     "test": "echo 'skip unit tests'",
