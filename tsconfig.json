@@ -17,14 +17,13 @@
     "emitDecoratorMetadata": true,
     "declarationDir": "dist/types",
     "outDir": "dist/lib",
-    "rootDir": ".",
     "typeRoots": [
       "node_modules/@types"
     ],
     "jsx": "react-jsx"
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "src",
+    "test"
   ]
 }

@@ -29,7 +29,8 @@ export default {
           'src/'
         ],
         exclude: [
-          'examples/'
+          'examples/',
+          'test'
         ]
       },
       useTsconfigDeclarationDir: true
