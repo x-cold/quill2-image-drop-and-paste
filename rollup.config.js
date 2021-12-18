@@ -4,9 +4,7 @@ import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
 import { babel } from '@rollup/plugin-babel';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('./package.json');
+import pkg from './package.json';
 
 const libraryName = 'index';
 
@@ -25,7 +23,14 @@ export default {
     // Allow json resolution
     json(),
     // Compile TypeScript files
-    typescript({ useTsconfigDeclarationDir: true }),
+    typescript({
+      tsconfigOverride: {
+        include: [
+          'src/'
+        ]
+      },
+      useTsconfigDeclarationDir: true
+    }),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
     babel({ babelHelpers: 'bundled' }),
