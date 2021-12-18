@@ -5,12 +5,12 @@
   "main": "dist/index.umd.js",
   "module": "dist/index.es5.js",
   "typings": "dist/types/index.d.ts",
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:x-cold/rollup-ts-library-boilerplate.git"
+    "url": "git@github.com:x-cold/quill2-image-drop-and-paste.git"
   },
   "scripts": {
     "prepare": "rm -rf .husky/_ && husky install",
@@ -37,11 +37,15 @@
     ]
   },
   "keywords": [
-    "normalize"
+    "quill",
+    "image",
+    "paste",
+    "drop",
+    "restore"
   ],
   "author": "x-cold <lxstart@outlook.com>",
   "license": "ISC",
-  "dependencies": {
+  "peerDependencies": {
     "quill": "^2.0.0-dev.4"
   },
   "devDependencies": {
