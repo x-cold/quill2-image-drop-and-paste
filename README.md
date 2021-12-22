@@ -18,7 +18,7 @@ quill2-image-drop-and-paste
 
 A quill plugin to deal with pasting and droping images and html including images. [Example](https://x-cold.github.io/quill2-image-drop-and-paste/react-demo/).
 
-![Paste html](https://github.com/x-cold/quill2-image-drop-and-paste/blob/master/screenshots/paste-html.gif)
+![Paste html](https://github.com/x-cold/quill2-image-drop-and-paste/blob/master/screenshots/paste-html.gif?raw=true)
 
 ## Usage
 
